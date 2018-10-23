@@ -33,7 +33,11 @@ class IndexPage extends React.Component {
     const { name, email, message } = this.state
     return (
       <Layout>
-        <form onSubmit={this.handleSubmit}>
+        <form
+          onSubmit={this.handleSubmit}
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+        >
           <p>
             <label>
               Your Name:{' '}
