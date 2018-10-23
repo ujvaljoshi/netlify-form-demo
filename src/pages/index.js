@@ -44,6 +44,9 @@ class IndexPage extends React.Component {
             </label>
           </p>
           <p>
+            <input type="hidden" name="form-name" value="contact" />
+          </p>
+          <p>
             <button type="submit">Send</button>
           </p>
         </form>
