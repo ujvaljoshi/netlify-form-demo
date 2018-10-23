@@ -3,54 +3,72 @@ import { navigateTo } from 'gatsby-link'
 
 import Layout from '../components/layout'
 
-function encode(data) {
+const encode = data => {
   return Object.keys(data)
     .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
     .join('&')
 }
 
 class IndexPage extends React.Component {
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
+  constructor(props) {
+    super(props)
+    this.state = { name: '', email: '', message: '' }
   }
 
   handleSubmit = e => {
-    e.preventDefault()
-    const form = e.target
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({
-        'form-name': form.getAttribute('name'),
-        ...this.state,
-      }),
+      body: encode({ 'form-name': 'contact', ...this.state }),
     })
-      .then(() => navigateTo(form.getAttribute('action')))
+      .then(() => alert('Success!'))
       .catch(error => alert(error))
+
+    e.preventDefault()
   }
 
+  handleChange = e => this.setState({ [e.target.name]: e.target.value })
+
   render() {
+    const { name, email, message } = this.state
     return (
-      <Layout>
-        <form
-          name="contact"
-          method="post"
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
-        >
-          <p>
-            <label>
-              Your Name: <input type="text" name="name" />
-            </label>
-          </p>
-          <p>
-            <input type="hidden" name="form-name" value="contact" />
-          </p>
-          <p>
-            <button type="submit">Send</button>
-          </p>
-        </form>
-      </Layout>
+      <form onSubmit={this.handleSubmit}>
+        <p>
+          <label>
+            Your Name:{' '}
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={this.handleChange}
+            />
+          </label>
+        </p>
+        <p>
+          <label>
+            Your Email:{' '}
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={this.handleChange}
+            />
+          </label>
+        </p>
+        <p>
+          <label>
+            Message:{' '}
+            <textarea
+              name="message"
+              value={message}
+              onChange={this.handleChange}
+            />
+          </label>
+        </p>
+        <p>
+          <button type="submit">Send</button>
+        </p>
+      </form>
     )
   }
 }
