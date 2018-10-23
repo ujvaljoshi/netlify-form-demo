@@ -32,32 +32,25 @@ class IndexPage extends React.Component {
   render() {
     return (
       <Layout>
-        <form
-          name="contact"
-          method="post"
-          action="/thanks/"
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
-          onSubmit={this.handleSubmit}
-        >
-          <div className="form-group">
-            <label htmlFor="">Name</label>
-            <input
-              type="text"
-              name="name"
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <div className="button-container">
-            <button
-              className="button is-rounded secondary-button"
-              href="#"
-              type="submit"
-            >
-              Send
-            </button>
-          </div>
+        <form name="contact" method="POST" netlify="true">
+          <p>
+            <label>
+              Your Name: <input type="text" name="name" />
+            </label>
+          </p>
+          <p>
+            <label>
+              Your Email: <input type="email" name="email" />
+            </label>
+          </p>
+          <p>
+            <label>
+              Message: <textarea name="message" />
+            </label>
+          </p>
+          <p>
+            <button type="submit">Send</button>
+          </p>
         </form>
       </Layout>
     )
