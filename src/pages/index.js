@@ -32,7 +32,12 @@ class IndexPage extends React.Component {
   render() {
     return (
       <Layout>
-        <form name="contact" method="POST" netlify="true">
+        <form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+        >
           <p>
             <label>
               Your Name: <input type="text" name="name" />
