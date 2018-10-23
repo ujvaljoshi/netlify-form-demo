@@ -19,7 +19,7 @@ class IndexPage extends React.Component {
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'contact', ...this.state }),
+      body: encode({ 'form-name': 'contact-us', ...this.state }),
     })
       .then(() => alert('Success!'))
       .catch(error => alert(error))
@@ -32,43 +32,45 @@ class IndexPage extends React.Component {
   render() {
     const { name, email, message } = this.state
     return (
-      <form onSubmit={this.handleSubmit}>
-        <p>
-          <label>
-            Your Name:{' '}
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={this.handleChange}
-            />
-          </label>
-        </p>
-        <p>
-          <label>
-            Your Email:{' '}
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={this.handleChange}
-            />
-          </label>
-        </p>
-        <p>
-          <label>
-            Message:{' '}
-            <textarea
-              name="message"
-              value={message}
-              onChange={this.handleChange}
-            />
-          </label>
-        </p>
-        <p>
-          <button type="submit">Send</button>
-        </p>
-      </form>
+      <Layout>
+        <form onSubmit={this.handleSubmit}>
+          <p>
+            <label>
+              Your Name:{' '}
+              <input
+                type="text"
+                name="name"
+                value={name}
+                onChange={this.handleChange}
+              />
+            </label>
+          </p>
+          <p>
+            <label>
+              Your Email:{' '}
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={this.handleChange}
+              />
+            </label>
+          </p>
+          <p>
+            <label>
+              Message:{' '}
+              <textarea
+                name="message"
+                value={message}
+                onChange={this.handleChange}
+              />
+            </label>
+          </p>
+          <p>
+            <button type="submit">Send</button>
+          </p>
+        </form>
+      </Layout>
     )
   }
 }
